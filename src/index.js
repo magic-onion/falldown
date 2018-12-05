@@ -9,6 +9,7 @@ let hit = false
 
 function setup () {
   rectMode(CORNER)
+  frameRate(30)
   createCanvas(700, 600)
   background(80, 80, 80)
   player = new Player
@@ -20,12 +21,13 @@ function setup () {
     let stream = new Stream(x, y)
     stream.generateShapes(x, y, shapeSize)
     streams.push(stream)
-    x += (shapeSize * 2)
+    x += (shapeSize * 1.7)
   }
 }
 
 function draw() {
     background(80, 80, 80)
+    // textAlign(CENTER)
     scoreBoard.display()
     player.display()
     streams.forEach(stream => {
@@ -33,15 +35,15 @@ function draw() {
       stream.shapes.forEach(shape => {
         hit = collideRectRect(player.location.x, player.location.y, player.width, player.height, shape.x, shape.y, shapeSize, shapeSize)
         if (hit) {
-          clear()
+          streams.splice(0, streams.length)
           background(123, 123, 123)
-          textSize(75)
+          textSize(50)
           text(`SCORE: ${scoreBoard.score}`, 150, 300)
           noLoop()
           player.score = scoreBoard.score
         }
         else {
-          stream.speed = stream.speed + 0.00004
+          stream.speed = stream.speed + 0.00008
         }
       })
     })
@@ -54,3 +56,9 @@ function draw() {
       }
     scoreBoard.score += 1
 }
+
+//button to start
+//button to restart
+//getting on the page
+//refactor for 400x400
+//export score

@@ -3,8 +3,8 @@ class Stream {
     this.x = x
     this.y = y
     this.shapes = [];
-    this.allShapes = 200
-    this.speed = 3
+    this.allShapes = 150
+    this.speed = 5
     this.gap = []
     this.shapeSpace = round(random(5, 7));
   }
@@ -41,7 +41,6 @@ class Stream {
       }
       else if (shape.y > height) {
         this.findAndDelete(shape)
-        console.log('deleted')
       }
     })
   }
