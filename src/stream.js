@@ -46,7 +46,3 @@ class Stream {
   }
 
 }
-
-
-// let color1 = round(random(0, 255)), color2 = round(random(0, 255)), color3 = round(random(0, 255))
-// fill(round(random(0, 255)),round(random(0, 255)),round(random(0, 255)))

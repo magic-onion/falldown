@@ -4,11 +4,12 @@ let stream
 let streams = []
 let playerScore;
 let player;
-let shapeSize = 50
+let shapeSize = 30
 let hit = false
+let isPlaying = true;
 
 function setup () {
-  createCanvas(700, 600)
+  createCanvas(400, 400)
   rectMode(CORNER)
   gameReset()
 }
@@ -30,8 +31,12 @@ function gameReset() {
 }
 
 function mousePressed() {
-  setup()
-  loop()
+  if (!isPlaying) {
+    setup()
+    isPlaying = true
+    loop()
+  }
+
 }
 
 function draw() {
@@ -44,11 +49,12 @@ function draw() {
       stream.shapes.forEach(shape => {
         hit = collideRectRect(player.location.x, player.location.y, player.width, player.height, shape.x, shape.y, shapeSize, shapeSize)
         if (hit) {
+          isPlaying = false
           setTimeout(function() {background(123, 123, 123)
             streams.splice(0, streams.length)
-          textSize(50)
-          text(`SCORE: ${scoreBoard.score} \n Click to Play Again`, 150, 300)
-          noLoop()}, 50)
+          textSize(30)
+          text(`      SCORE: ${scoreBoard.score} \n Click to Play Again`, 60, 180)
+          noLoop()}, 30)
           player.score = scoreBoard.score
         }
         else {
