@@ -1,16 +1,20 @@
 const allShapes = []
 let shape;
-let shapeSize = 50
 let stream
 let streams = []
 let playerScore;
 let player;
+let shapeSize = 50
 let hit = false
 
 function setup () {
-  rectMode(CORNER)
-  frameRate(30)
   createCanvas(700, 600)
+  rectMode(CORNER)
+  gameReset()
+}
+
+function gameReset() {
+  frameRate(30)
   background(80, 80, 80)
   player = new Player
   scoreBoard = new ScoreBoard
@@ -21,13 +25,18 @@ function setup () {
     let stream = new Stream(x, y)
     stream.generateShapes(x, y, shapeSize)
     streams.push(stream)
-    x += (shapeSize * 1.7)
+    x += (shapeSize * 2)
   }
 }
 
+function mousePressed() {
+  setup()
+  loop()
+}
+
 function draw() {
+    rectMode(CORNER)
     background(80, 80, 80)
-    // textAlign(CENTER)
     scoreBoard.display()
     player.display()
     streams.forEach(stream => {
@@ -35,11 +44,11 @@ function draw() {
       stream.shapes.forEach(shape => {
         hit = collideRectRect(player.location.x, player.location.y, player.width, player.height, shape.x, shape.y, shapeSize, shapeSize)
         if (hit) {
-          streams.splice(0, streams.length)
-          background(123, 123, 123)
+          setTimeout(function() {background(123, 123, 123)
+            streams.splice(0, streams.length)
           textSize(50)
-          text(`SCORE: ${scoreBoard.score}`, 150, 300)
-          noLoop()
+          text(`SCORE: ${scoreBoard.score} \n Click to Play Again`, 150, 300)
+          noLoop()}, 50)
           player.score = scoreBoard.score
         }
         else {
@@ -56,9 +65,3 @@ function draw() {
       }
     scoreBoard.score += 1
 }
-
-//button to start
-//button to restart
-//getting on the page
-//refactor for 400x400
-//export score

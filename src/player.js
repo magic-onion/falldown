@@ -12,16 +12,17 @@ class Player {
     rect(this.location.x, this.location.y, this.width, this.height)
     pop()
     if (keyIsDown(LEFT_ARROW)) {
-      player.location.x -= 10
+      player.location.x -= 6
       if (this.location.x < 0) {
         this.location.x = width
       }
     }
     else if (keyIsDown(RIGHT_ARROW)) {
-      player.location.x += 10
+      player.location.x += 6
       if (this.location.x > width) {
         this.location.x = 0
       }
+
     }
 
   }
